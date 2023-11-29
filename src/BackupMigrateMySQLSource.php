@@ -18,12 +18,11 @@ class BackupMigrateMySQLSource extends MySQLiSource {
     $convert = $this->confGet('convert') ?? 'mysql';
     switch ($convert) {
       case 'mariadb':
-        $out = str_replace('utf8mb4_unicode_ci', 'utf8mb4_0900_ai_ci', $out);
+        $out = str_replace('DEFAULT CHARSET=utf8mb4_unicode_ci', 'DEFAULT CHARSET=utf8mb4_0900_ai_ci', $out);
         break;
 
       case 'mysql':
-      default:
-        $out = str_replace('utf8mb4_0900_ai_ci', 'utf8mb4_unicode_ci', $out);
+        $out = str_replace('DEFAULT CHARSET=utf8mb4_0900_ai_ci', 'DEFAULT CHARSET=utf8mb4_unicode_ci', $out);
         break;
 
     }
