@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Contains backup_migrate_mysql.module.
+ */
+
+/**
+ * Implements hook_backup_migrate_source_info_alter().
+ *
+ * Provides alter for the MySQL source plugin.
+ */
+function backup_migrate_mysql_backup_migrate_source_info_alter(array &$info) {
+  if (isset($info['MySQL'])) {
+    $info['MySQL']['wrapped_class'] = '\Drupal\backup_migrate_mysql\BackupMigrateMySQLSource';
+  }
+}

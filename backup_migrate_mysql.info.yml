@@ -1,0 +1,7 @@
+name: 'Backup and Migrate MySQL'
+type: module
+description: 'Convert MySQL database dump to the correct charset.'
+core_version_requirement: ^9 || ^10
+package: Other
+dependencies:
+  - backup_migrate:backup_migrate
