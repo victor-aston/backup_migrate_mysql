@@ -15,7 +15,7 @@ class BackupMigrateMySQLSource extends MySQLiSource {
   protected function _getTableCreateSql(array $table) {
     $out = parent::_getTableCreateSql($table);
 
-    $convert = $this->confGet('convert') ?? 'mysql';
+    $convert = $this->confGet('convert') ?? '';
     switch ($convert) {
       case 'mariadb':
         $out = str_replace('DEFAULT CHARSET=utf8mb4_unicode_ci', 'DEFAULT CHARSET=utf8mb4_0900_ai_ci', $out);
