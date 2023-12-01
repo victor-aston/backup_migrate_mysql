@@ -2,7 +2,9 @@
 
 namespace Drupal\backup_migrate_mysql;
 
+use Drupal\backup_migrate\Core\Config\Config;
 use Drupal\backup_migrate\Core\Source\MySQLiSource;
+use Drupal\Core\Database\Database;
 
 /**
  * Class BackupMigrateMySQLSource. Provides wrapper class for the MySQL source plugin.
@@ -50,6 +52,27 @@ class BackupMigrateMySQLSource extends MySQLiSource {
     ];
 
     return $schema;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function configDefaults() {
+    $configs = [
+      'generator' => 'Backup and Migrate',
+    ];
+
+    if ($connection = Database::getConnectionInfo()) {
+      $items = ['host', 'database', 'username', 'password', 'port'];
+
+      foreach ($items as $item) {
+        if (isset($connection['default'][$item])) {
+          $configs[$item] = $connection['default'][$item];
+        }
+      }
+    }
+
+    return new Config($configs);
   }
 
 }
